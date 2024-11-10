@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock & News Alert App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card-title {
+            color: #007bff;
+        }
+        .metric {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .confidence {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .news-section {
+            margin-top: 30px;
+        }
+        .news-title {
+            font-size: 1.2rem;
+            color: #343a40;
+        }
+        .news-description {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h1 class="display-4">{{ company_name }} Stock & News Alert</h1>
+        <p class="lead text-muted">Stay updated with the latest stock prices, predictions, and news for {{ company_name }} ({{ stock_name }})</p>
+    </div>
+
+    <!-- Stock Price Section -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Stock Prices</h5>
+            <p class="metric">Yesterday's Closing Price: <span class="text-primary">${{ yesterday_closing_price }}</span></p>
+            <p class="metric">Day Before Yesterday's Closing Price: <span class="text-primary">${{ day_before_yesterday_closing_price }}</span></p>
+            <p class="metric">Price Difference: <span class="text-danger">{{ difference_percentage }}%</span></p>
+        </div>
+    </div>
+
+    <!-- Prediction Section -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Next Day Price Prediction</h5>
+            <p class="metric">Predicted Price: <span class="text-primary">${{ predicted_price }}</span></p>
+            <p class="metric">Confidence Level: <span class="confidence">{{ confidence_level }}%</span></p>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <div class="news-section">
+        <h5 class="mb-3">Latest News</h5>
+        {% for article in articles %}
+        <div class="card">
+            <div class="card-body">
+                <h6 class="news-title">{{ article['title'] }}</h6>
+                <p class="news-description">{{ article['description'] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
